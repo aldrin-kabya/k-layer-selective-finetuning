@@ -4,7 +4,7 @@ This repository contains the official implementation for "Training-Free Layer Se
 
 ## Installation
 
-### 1. Environment Setup (Windows 11)
+### 1. Environment Setup
 
 It is recommended to use Anaconda or a virtual environment.
 
