@@ -1,0 +1,15 @@
+torch>=2.4.0
+transformers>=4.45.1
+numpy
+pandas
+scikit-learn
+tqdm
+tabulate
+datasets
+evaluate
+rouge_score
+nltk
+pycocoevalcap
+huggingface-hub
+matplotlib
+seaborn
