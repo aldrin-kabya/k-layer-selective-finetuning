@@ -1,4 +1,3 @@
-```markdown
 # Training-Free Layer Selection for Partial Fine-Tuning
 
 This repository contains the official implementation for "Training-Free Layer Selection for Partial Fine-Tuning of Language Models". It provides methods to select optimal layers for fine-tuning BERT (Classification) and GPT-2 (Generation) using cosine similarity of representative tokens, without requiring gradient-based training for selection.
@@ -59,4 +58,3 @@ Results are saved in `./results_e2e/`.
 - `src/`: Contains model definitions (`models_bert.py`, `models_gpt2.py`), dataset loaders, and training engines.
 - `run_glue.py`: CLI entry point for classification tasks.
 - `run_e2e.py`: CLI entry point for generation tasks.
-```
