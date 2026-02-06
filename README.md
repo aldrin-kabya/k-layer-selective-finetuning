@@ -118,7 +118,7 @@ After training completes:
 If you use this code for your research, please cite our paper:
 
 ```bibtex
-@article{biswas2025training,
+@article{biswas2026training,
   title={Training-Free Layer Selection for Partial Fine-Tuning of Language Models},
   author={Biswas, Aldrin Kabya and Fahim, Md and Fuad, Md Tahmid Hasan and Mazumder, Akm Moshiur Rahman and Ali, Amin Ahsan and Rahman, AKM Mahbubur},
   journal={arXiv preprint},

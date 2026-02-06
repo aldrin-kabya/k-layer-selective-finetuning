@@ -5,7 +5,8 @@ import time
 import csv
 import copy
 from tabulate import tabulate
-from transformers import GPT2Tokenizer, AdamW, get_cosine_schedule_with_warmup
+from transformers import GPT2Tokenizer, get_cosine_schedule_with_warmup
+from torch.optim import AdamW
 from torch.utils.data import DataLoader
 
 from src.datasets_e2e import E2EDataset, E2EEvalDataset, eval_collate_fn

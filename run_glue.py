@@ -4,7 +4,8 @@ import torch
 import time
 import csv
 from tabulate import tabulate
-from transformers import BertTokenizer, AdamW, get_linear_schedule_with_warmup
+from transformers import BertTokenizer, get_linear_schedule_with_warmup
+from torch.optim import AdamW
 from torch.utils.data import DataLoader
 
 from src.datasets_glue import GLUEDataset
@@ -47,20 +48,25 @@ def main():
     
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     
+    # Handle the 'original' subfolder structure from the tarball
+    if os.path.exists(os.path.join(args.data_dir, 'original')):
+        base_path = os.path.join(args.data_dir, 'original')
+    else:
+        base_path = args.data_dir
+
     # Path handling
     if args.dataset == 'mnli':
-        train_path = os.path.join(args.data_dir, 'MNLI/train.tsv')
-        dev_path = os.path.join(args.data_dir, 'MNLI/dev_matched.tsv')
+        train_path = os.path.join(base_path, 'MNLI/train.tsv')
+        dev_path = os.path.join(base_path, 'MNLI/dev_matched.tsv')
     elif args.dataset == 'mnli-mm':
-        train_path = os.path.join(args.data_dir, 'MNLI/train.tsv')
-        dev_path = os.path.join(args.data_dir, 'MNLI/dev_mismatched.tsv')
+        train_path = os.path.join(base_path, 'MNLI/train.tsv')
+        dev_path = os.path.join(base_path, 'MNLI/dev_mismatched.tsv')
     else:
         # Standard folder names usually match task name uppercase or specific cases
-        # Adjust mapping as needed based on extraction
         folder_map = {'sst2': 'SST-2', 'cola': 'CoLA', 'qnli': 'QNLI', 'rte': 'RTE', 'mrpc': 'MRPC', 'qqp': 'QQP', 'snli': 'SNLI'}
         folder_name = folder_map.get(args.dataset, args.dataset)
-        train_path = os.path.join(args.data_dir, folder_name, 'train.tsv' if args.dataset in folder_map else 'train.csv')
-        dev_path = os.path.join(args.data_dir, folder_name, 'dev.tsv' if args.dataset in folder_map else 'test.csv')
+        train_path = os.path.join(base_path, folder_name, 'train.tsv' if args.dataset in folder_map else 'train.csv')
+        dev_path = os.path.join(base_path, folder_name, 'dev.tsv' if args.dataset in folder_map else 'test.csv')
 
     train_dataset = GLUEDataset(train_path, args.dataset, tokenizer, max_len)
     dev_dataset = GLUEDataset(dev_path, args.dataset, tokenizer, max_len)
